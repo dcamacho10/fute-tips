@@ -46,10 +46,22 @@ export async function getFixtures(report) {
 
     const response = JSON.parse(fs.readFileSync('C:\\Users\\diogo\\fute-tips\\mocks\\Fixtures_Current.json'));
     report.addCurrentFixture(response)
+    return response;
     // console.log(JSON.stringify(response.data, null, 2)); // Display response data
   } catch (error) {
     console.error(error);
   }
+}
+
+export async function getPrediction(fixtureId, report) {
+  // const response = await axios.request(options('GET', 'https://api-football-v1.p.rapidapi.com/v3/predictions', {
+  //   fixture: 'fixtureId'
+  // }));
+  //Usando a função para salvar os dados para criação do mock, retirar quando o MVP estiver pronto
+  // const jsonData = JSON.stringify(response.data);
+  // saveJson('Fixture_prediction', jsonData)
+  const response = JSON.parse(fs.readFileSync('C:\\Users\\diogo\\fute-tips\\mocks\\Fixture_Prediction.json'));
+  report.addFixturePrediction(response)
 }
 
 

@@ -1,0 +1,1181 @@
+{
+  "get": "predictions",
+  "parameters": {
+    "fixture": "1035432"
+  },
+  "errors": [],
+  "results": 1,
+  "paging": {
+    "current": 1,
+    "total": 1
+  },
+  "response": [
+    {
+      "predictions": {
+        "winner": {
+          "id": 55,
+          "name": "Brentford",
+          "comment": "Win or draw"
+        },
+        "win_or_draw": true,
+        "under_over": null,
+        "goals": {
+          "home": "-1.5",
+          "away": "-2.5"
+        },
+        "advice": "Double chance : draw or Brentford",
+        "percent": {
+          "home": "10%",
+          "draw": "45%",
+          "away": "45%"
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/39.png",
+        "flag": "https://media.api-sports.io/flags/gb.svg",
+        "season": 2023
+      },
+      "teams": {
+        "home": {
+          "id": 48,
+          "name": "West Ham",
+          "logo": "https://media.api-sports.io/football/teams/48.png",
+          "last_5": {
+            "played": 5,
+            "form": "13%",
+            "att": "17%",
+            "def": "22%",
+            "goals": {
+              "for": {
+                "total": 3,
+                "average": "0.6"
+              },
+              "against": {
+                "total": 14,
+                "average": "2.8"
+              }
+            }
+          },
+          "league": {
+            "form": "DWWWLLWDLLLWWDWLWWWDDDLLL",
+            "fixtures": {
+              "played": {
+                "home": 12,
+                "away": 13,
+                "total": 25
+              },
+              "wins": {
+                "home": 5,
+                "away": 5,
+                "total": 10
+              },
+              "draws": {
+                "home": 4,
+                "away": 2,
+                "total": 6
+              },
+              "loses": {
+                "home": 3,
+                "away": 6,
+                "total": 9
+              }
+            },
+            "goals": {
+              "for": {
+                "total": {
+                  "home": 18,
+                  "away": 18,
+                  "total": 36
+                },
+                "average": {
+                  "home": "1.5",
+                  "away": "1.4",
+                  "total": "1.4"
+                },
+                "minute": {
+                  "0-15": {
+                    "total": 5,
+                    "percentage": "13.89%"
+                  },
+                  "16-30": {
+                    "total": 6,
+                    "percentage": "16.67%"
+                  },
+                  "31-45": {
+                    "total": 5,
+                    "percentage": "13.89%"
+                  },
+                  "46-60": {
+                    "total": 7,
+                    "percentage": "19.44%"
+                  },
+                  "61-75": {
+                    "total": 6,
+                    "percentage": "16.67%"
+                  },
+                  "76-90": {
+                    "total": 5,
+                    "percentage": "13.89%"
+                  },
+                  "91-105": {
+                    "total": 2,
+                    "percentage": "5.56%"
+                  },
+                  "106-120": {
+                    "total": null,
+                    "percentage": null
+                  }
+                }
+              },
+              "against": {
+                "total": {
+                  "home": 17,
+                  "away": 27,
+                  "total": 44
+                },
+                "average": {
+                  "home": "1.4",
+                  "away": "2.1",
+                  "total": "1.8"
+                },
+                "minute": {
+                  "0-15": {
+                    "total": 3,
+                    "percentage": "6.82%"
+                  },
+                  "16-30": {
+                    "total": 5,
+                    "percentage": "11.36%"
+                  },
+                  "31-45": {
+                    "total": 7,
+                    "percentage": "15.91%"
+                  },
+                  "46-60": {
+                    "total": 11,
+                    "percentage": "25.00%"
+                  },
+                  "61-75": {
+                    "total": 6,
+                    "percentage": "13.64%"
+                  },
+                  "76-90": {
+                    "total": 9,
+                    "percentage": "20.45%"
+                  },
+                  "91-105": {
+                    "total": 3,
+                    "percentage": "6.82%"
+                  },
+                  "106-120": {
+                    "total": null,
+                    "percentage": null
+                  }
+                }
+              }
+            },
+            "biggest": {
+              "streak": {
+                "wins": 3,
+                "draws": 3,
+                "loses": 3
+              },
+              "wins": {
+                "home": "3-0",
+                "away": "1-3"
+              },
+              "loses": {
+                "home": "0-6",
+                "away": "5-0"
+              },
+              "goals": {
+                "for": {
+                  "home": 3,
+                  "away": 3
+                },
+                "against": {
+                  "home": 6,
+                  "away": 5
+                }
+              }
+            },
+            "clean_sheet": {
+              "home": 4,
+              "away": 1,
+              "total": 5
+            },
+            "failed_to_score": {
+              "home": 3,
+              "away": 3,
+              "total": 6
+            },
+            "penalty": {
+              "scored": {
+                "total": 3,
+                "percentage": "100.00%"
+              },
+              "missed": {
+                "total": 0,
+                "percentage": "0%"
+              },
+              "total": 3
+            },
+            "lineups": [
+              {
+                "formation": "4-2-3-1",
+                "played": 19
+              },
+              {
+                "formation": "4-4-1-1",
+                "played": 2
+              },
+              {
+                "formation": "4-1-4-1",
+                "played": 1
+              },
+              {
+                "formation": "4-4-2",
+                "played": 1
+              },
+              {
+                "formation": "4-3-3",
+                "played": 1
+              },
+              {
+                "formation": "4-3-2-1",
+                "played": 1
+              }
+            ],
+            "cards": {
+              "yellow": {
+                "0-15": {
+                  "total": 4,
+                  "percentage": "6.45%"
+                },
+                "16-30": {
+                  "total": 5,
+                  "percentage": "8.06%"
+                },
+                "31-45": {
+                  "total": 16,
+                  "percentage": "25.81%"
+                },
+                "46-60": {
+                  "total": 8,
+                  "percentage": "12.90%"
+                },
+                "61-75": {
+                  "total": 10,
+                  "percentage": "16.13%"
+                },
+                "76-90": {
+                  "total": 11,
+                  "percentage": "17.74%"
+                },
+                "91-105": {
+                  "total": 8,
+                  "percentage": "12.90%"
+                },
+                "106-120": {
+                  "total": null,
+                  "percentage": null
+                }
+              },
+              "red": {
+                "0-15": {
+                  "total": null,
+                  "percentage": null
+                },
+                "16-30": {
+                  "total": null,
+                  "percentage": null
+                },
+                "31-45": {
+                  "total": null,
+                  "percentage": null
+                },
+                "46-60": {
+                  "total": null,
+                  "percentage": null
+                },
+                "61-75": {
+                  "total": 2,
+                  "percentage": "66.67%"
+                },
+                "76-90": {
+                  "total": null,
+                  "percentage": null
+                },
+                "91-105": {
+                  "total": 1,
+                  "percentage": "33.33%"
+                },
+                "106-120": {
+                  "total": null,
+                  "percentage": null
+                }
+              }
+            }
+          }
+        },
+        "away": {
+          "id": 55,
+          "name": "Brentford",
+          "logo": "https://media.api-sports.io/football/teams/55.png",
+          "last_5": {
+            "played": 5,
+            "form": "20%",
+            "att": "33%",
+            "def": "39%",
+            "goals": {
+              "for": {
+                "total": 6,
+                "average": "1.2"
+              },
+              "against": {
+                "total": 11,
+                "average": "2.2"
+              }
+            }
+          },
+          "league": {
+            "form": "DWDDLLDLWWWLLWLLLLLWLLWLL",
+            "fixtures": {
+              "played": {
+                "home": 13,
+                "away": 12,
+                "total": 25
+              },
+              "wins": {
+                "home": 4,
+                "away": 3,
+                "total": 7
+              },
+              "draws": {
+                "home": 3,
+                "away": 1,
+                "total": 4
+              },
+              "loses": {
+                "home": 6,
+                "away": 8,
+                "total": 14
+              }
+            },
+            "goals": {
+              "for": {
+                "total": {
+                  "home": 22,
+                  "away": 13,
+                  "total": 35
+                },
+                "average": {
+                  "home": "1.7",
+                  "away": "1.1",
+                  "total": "1.4"
+                },
+                "minute": {
+                  "0-15": {
+                    "total": 4,
+                    "percentage": "11.76%"
+                  },
+                  "16-30": {
+                    "total": 9,
+                    "percentage": "26.47%"
+                  },
+                  "31-45": {
+                    "total": 4,
+                    "percentage": "11.76%"
+                  },
+                  "46-60": {
+                    "total": 5,
+                    "percentage": "14.71%"
+                  },
+                  "61-75": {
+                    "total": 6,
+                    "percentage": "17.65%"
+                  },
+                  "76-90": {
+                    "total": 3,
+                    "percentage": "8.82%"
+                  },
+                  "91-105": {
+                    "total": 3,
+                    "percentage": "8.82%"
+                  },
+                  "106-120": {
+                    "total": null,
+                    "percentage": null
+                  }
+                }
+              },
+              "against": {
+                "total": {
+                  "home": 27,
+                  "away": 17,
+                  "total": 44
+                },
+                "average": {
+                  "home": "2.1",
+                  "away": "1.4",
+                  "total": "1.8"
+                },
+                "minute": {
+                  "0-15": {
+                    "total": 6,
+                    "percentage": "13.33%"
+                  },
+                  "16-30": {
+                    "total": 4,
+                    "percentage": "8.89%"
+                  },
+                  "31-45": {
+                    "total": 4,
+                    "percentage": "8.89%"
+                  },
+                  "46-60": {
+                    "total": 11,
+                    "percentage": "24.44%"
+                  },
+                  "61-75": {
+                    "total": 10,
+                    "percentage": "22.22%"
+                  },
+                  "76-90": {
+                    "total": 8,
+                    "percentage": "17.78%"
+                  },
+                  "91-105": {
+                    "total": 2,
+                    "percentage": "4.44%"
+                  },
+                  "106-120": {
+                    "total": null,
+                    "percentage": null
+                  }
+                }
+              }
+            },
+            "biggest": {
+              "streak": {
+                "wins": 3,
+                "draws": 2,
+                "loses": 5
+              },
+              "wins": {
+                "home": "3-0",
+                "away": "0-3"
+              },
+              "loses": {
+                "home": "1-4",
+                "away": "3-0"
+              },
+              "goals": {
+                "for": {
+                  "home": 3,
+                  "away": 3
+                },
+                "against": {
+                  "home": 4,
+                  "away": 3
+                }
+              }
+            },
+            "clean_sheet": {
+              "home": 1,
+              "away": 3,
+              "total": 4
+            },
+            "failed_to_score": {
+              "home": 1,
+              "away": 4,
+              "total": 5
+            },
+            "penalty": {
+              "scored": {
+                "total": 3,
+                "percentage": "100.00%"
+              },
+              "missed": {
+                "total": 0,
+                "percentage": "0%"
+              },
+              "total": 3
+            },
+            "lineups": [
+              {
+                "formation": "4-3-3",
+                "played": 10
+              },
+              {
+                "formation": "3-5-2",
+                "played": 10
+              },
+              {
+                "formation": "5-3-2",
+                "played": 4
+              },
+              {
+                "formation": "4-4-2",
+                "played": 1
+              }
+            ],
+            "cards": {
+              "yellow": {
+                "0-15": {
+                  "total": 2,
+                  "percentage": "3.57%"
+                },
+                "16-30": {
+                  "total": 5,
+                  "percentage": "8.93%"
+                },
+                "31-45": {
+                  "total": 7,
+                  "percentage": "12.50%"
+                },
+                "46-60": {
+                  "total": 10,
+                  "percentage": "17.86%"
+                },
+                "61-75": {
+                  "total": 11,
+                  "percentage": "19.64%"
+                },
+                "76-90": {
+                  "total": 14,
+                  "percentage": "25.00%"
+                },
+                "91-105": {
+                  "total": 6,
+                  "percentage": "10.71%"
+                },
+                "106-120": {
+                  "total": null,
+                  "percentage": null
+                },
+                "": {
+                  "total": 1,
+                  "percentage": "1.79%"
+                }
+              },
+              "red": {
+                "0-15": {
+                  "total": null,
+                  "percentage": null
+                },
+                "16-30": {
+                  "total": null,
+                  "percentage": null
+                },
+                "31-45": {
+                  "total": null,
+                  "percentage": null
+                },
+                "46-60": {
+                  "total": null,
+                  "percentage": null
+                },
+                "61-75": {
+                  "total": 1,
+                  "percentage": "100.00%"
+                },
+                "76-90": {
+                  "total": null,
+                  "percentage": null
+                },
+                "91-105": {
+                  "total": null,
+                  "percentage": null
+                },
+                "106-120": {
+                  "total": null,
+                  "percentage": null
+                }
+              }
+            }
+          }
+        }
+      },
+      "comparison": {
+        "form": {
+          "home": "40%",
+          "away": "60%"
+        },
+        "att": {
+          "home": "33%",
+          "away": "67%"
+        },
+        "def": {
+          "home": "44%",
+          "away": "56%"
+        },
+        "poisson_distribution": {
+          "home": "54%",
+          "away": "46%"
+        },
+        "h2h": {
+          "home": "20%",
+          "away": "80%"
+        },
+        "goals": {
+          "home": "25%",
+          "away": "75%"
+        },
+        "total": {
+          "home": "36.0%",
+          "away": "64.0%"
+        }
+      },
+      "h2h": [
+        {
+          "fixture": {
+            "id": 1035137,
+            "referee": "Thomas Bramall, England",
+            "timezone": "UTC",
+            "date": "2023-11-04T15:00:00+00:00",
+            "timestamp": 1699110000,
+            "periods": {
+              "first": 1699110000,
+              "second": 1699113600
+            },
+            "venue": {
+              "id": 10503,
+              "name": "Gtech Community Stadium",
+              "city": "Brentford, Middlesex"
+            },
+            "status": {
+              "long": "Match Finished",
+              "short": "FT",
+              "elapsed": 90
+            }
+          },
+          "league": {
+            "id": 39,
+            "name": "Premier League",
+            "country": "England",
+            "logo": "https://media.api-sports.io/football/leagues/39.png",
+            "flag": "https://media.api-sports.io/flags/gb.svg",
+            "season": 2023,
+            "round": "Regular Season - 11"
+          },
+          "teams": {
+            "home": {
+              "id": 55,
+              "name": "Brentford",
+              "logo": "https://media.api-sports.io/football/teams/55.png",
+              "winner": true
+            },
+            "away": {
+              "id": 48,
+              "name": "West Ham",
+              "logo": "https://media.api-sports.io/football/teams/48.png",
+              "winner": false
+            }
+          },
+          "goals": {
+            "home": 3,
+            "away": 2
+          },
+          "score": {
+            "halftime": {
+              "home": 1,
+              "away": 2
+            },
+            "fulltime": {
+              "home": 3,
+              "away": 2
+            },
+            "extratime": {
+              "home": null,
+              "away": null
+            },
+            "penalty": {
+              "home": null,
+              "away": null
+            }
+          }
+        },
+        {
+          "fixture": {
+            "id": 868298,
+            "referee": "M. Oliver",
+            "timezone": "UTC",
+            "date": "2023-05-14T13:00:00+00:00",
+            "timestamp": 1684069200,
+            "periods": {
+              "first": 1684069200,
+              "second": 1684072800
+            },
+            "venue": {
+              "id": 10503,
+              "name": "Gtech Community Stadium",
+              "city": "Brentford, Middlesex"
+            },
+            "status": {
+              "long": "Match Finished",
+              "short": "FT",
+              "elapsed": 90
+            }
+          },
+          "league": {
+            "id": 39,
+            "name": "Premier League",
+            "country": "England",
+            "logo": "https://media.api-sports.io/football/leagues/39.png",
+            "flag": "https://media.api-sports.io/flags/gb.svg",
+            "season": 2022,
+            "round": "Regular Season - 36"
+          },
+          "teams": {
+            "home": {
+              "id": 55,
+              "name": "Brentford",
+              "logo": "https://media.api-sports.io/football/teams/55.png",
+              "winner": true
+            },
+            "away": {
+              "id": 48,
+              "name": "West Ham",
+              "logo": "https://media.api-sports.io/football/teams/48.png",
+              "winner": false
+            }
+          },
+          "goals": {
+            "home": 2,
+            "away": 0
+          },
+          "score": {
+            "halftime": {
+              "home": 2,
+              "away": 0
+            },
+            "fulltime": {
+              "home": 2,
+              "away": 0
+            },
+            "extratime": {
+              "home": null,
+              "away": null
+            },
+            "penalty": {
+              "home": null,
+              "away": null
+            }
+          }
+        },
+        {
+          "fixture": {
+            "id": 976469,
+            "referee": "A. Marriner",
+            "timezone": "UTC",
+            "date": "2023-01-07T17:30:00+00:00",
+            "timestamp": 1673112600,
+            "periods": {
+              "first": 1673112600,
+              "second": 1673116200
+            },
+            "venue": {
+              "id": 10503,
+              "name": "Gtech Community Stadium",
+              "city": "Brentford, Middlesex"
+            },
+            "status": {
+              "long": "Match Finished",
+              "short": "FT",
+              "elapsed": 90
+            }
+          },
+          "league": {
+            "id": 45,
+            "name": "FA Cup",
+            "country": "England",
+            "logo": "https://media.api-sports.io/football/leagues/45.png",
+            "flag": "https://media.api-sports.io/flags/gb.svg",
+            "season": 2022,
+            "round": "3rd Round"
+          },
+          "teams": {
+            "home": {
+              "id": 55,
+              "name": "Brentford",
+              "logo": "https://media.api-sports.io/football/teams/55.png",
+              "winner": false
+            },
+            "away": {
+              "id": 48,
+              "name": "West Ham",
+              "logo": "https://media.api-sports.io/football/teams/48.png",
+              "winner": true
+            }
+          },
+          "goals": {
+            "home": 0,
+            "away": 1
+          },
+          "score": {
+            "halftime": {
+              "home": 0,
+              "away": 0
+            },
+            "fulltime": {
+              "home": 0,
+              "away": 1
+            },
+            "extratime": {
+              "home": null,
+              "away": null
+            },
+            "penalty": {
+              "home": null,
+              "away": null
+            }
+          }
+        },
+        {
+          "fixture": {
+            "id": 868124,
+            "referee": "D. England",
+            "timezone": "UTC",
+            "date": "2022-12-30T19:45:00+00:00",
+            "timestamp": 1672429500,
+            "periods": {
+              "first": 1672429500,
+              "second": 1672433100
+            },
+            "venue": {
+              "id": 598,
+              "name": "London Stadium",
+              "city": "London"
+            },
+            "status": {
+              "long": "Match Finished",
+              "short": "FT",
+              "elapsed": 90
+            }
+          },
+          "league": {
+            "id": 39,
+            "name": "Premier League",
+            "country": "England",
+            "logo": "https://media.api-sports.io/football/leagues/39.png",
+            "flag": "https://media.api-sports.io/flags/gb.svg",
+            "season": 2022,
+            "round": "Regular Season - 18"
+          },
+          "teams": {
+            "home": {
+              "id": 48,
+              "name": "West Ham",
+              "logo": "https://media.api-sports.io/football/teams/48.png",
+              "winner": false
+            },
+            "away": {
+              "id": 55,
+              "name": "Brentford",
+              "logo": "https://media.api-sports.io/football/teams/55.png",
+              "winner": true
+            }
+          },
+          "goals": {
+            "home": 0,
+            "away": 2
+          },
+          "score": {
+            "halftime": {
+              "home": 0,
+              "away": 2
+            },
+            "fulltime": {
+              "home": 0,
+              "away": 2
+            },
+            "extratime": {
+              "home": null,
+              "away": null
+            },
+            "penalty": {
+              "home": null,
+              "away": null
+            }
+          }
+        },
+        {
+          "fixture": {
+            "id": 710868,
+            "referee": "M. Atkinson",
+            "timezone": "UTC",
+            "date": "2022-04-10T13:00:00+00:00",
+            "timestamp": 1649595600,
+            "periods": {
+              "first": 1649595600,
+              "second": 1649599200
+            },
+            "venue": {
+              "id": 10503,
+              "name": "Brentford Community Stadium",
+              "city": "Brentford, Middlesex"
+            },
+            "status": {
+              "long": "Match Finished",
+              "short": "FT",
+              "elapsed": 90
+            }
+          },
+          "league": {
+            "id": 39,
+            "name": "Premier League",
+            "country": "England",
+            "logo": "https://media.api-sports.io/football/leagues/39.png",
+            "flag": "https://media.api-sports.io/flags/gb.svg",
+            "season": 2021,
+            "round": "Regular Season - 32"
+          },
+          "teams": {
+            "home": {
+              "id": 55,
+              "name": "Brentford",
+              "logo": "https://media.api-sports.io/football/teams/55.png",
+              "winner": true
+            },
+            "away": {
+              "id": 48,
+              "name": "West Ham",
+              "logo": "https://media.api-sports.io/football/teams/48.png",
+              "winner": false
+            }
+          },
+          "goals": {
+            "home": 2,
+            "away": 0
+          },
+          "score": {
+            "halftime": {
+              "home": 0,
+              "away": 0
+            },
+            "fulltime": {
+              "home": 2,
+              "away": 0
+            },
+            "extratime": {
+              "home": null,
+              "away": null
+            },
+            "penalty": {
+              "home": null,
+              "away": null
+            }
+          }
+        },
+        {
+          "fixture": {
+            "id": 710624,
+            "referee": "P. Bankes",
+            "timezone": "UTC",
+            "date": "2021-10-03T13:00:00+00:00",
+            "timestamp": 1633266000,
+            "periods": {
+              "first": 1633266000,
+              "second": 1633269600
+            },
+            "venue": {
+              "id": 598,
+              "name": "London Stadium",
+              "city": "London"
+            },
+            "status": {
+              "long": "Match Finished",
+              "short": "FT",
+              "elapsed": 90
+            }
+          },
+          "league": {
+            "id": 39,
+            "name": "Premier League",
+            "country": "England",
+            "logo": "https://media.api-sports.io/football/leagues/39.png",
+            "flag": "https://media.api-sports.io/flags/gb.svg",
+            "season": 2021,
+            "round": "Regular Season - 7"
+          },
+          "teams": {
+            "home": {
+              "id": 48,
+              "name": "West Ham",
+              "logo": "https://media.api-sports.io/football/teams/48.png",
+              "winner": false
+            },
+            "away": {
+              "id": 55,
+              "name": "Brentford",
+              "logo": "https://media.api-sports.io/football/teams/55.png",
+              "winner": true
+            }
+          },
+          "goals": {
+            "home": 1,
+            "away": 2
+          },
+          "score": {
+            "halftime": {
+              "home": 0,
+              "away": 1
+            },
+            "fulltime": {
+              "home": 1,
+              "away": 2
+            },
+            "extratime": {
+              "home": null,
+              "away": null
+            },
+            "penalty": {
+              "home": null,
+              "away": null
+            }
+          }
+        },
+        {
+          "fixture": {
+            "id": 748004,
+            "referee": null,
+            "timezone": "UTC",
+            "date": "2021-07-31T00:00:00+00:00",
+            "timestamp": 1627689600,
+            "periods": {
+              "first": 1627689600,
+              "second": 1627693200
+            },
+            "venue": {
+              "id": 10503,
+              "name": "Brentford Community Stadium",
+              "city": "Brentford, Middlesex"
+            },
+            "status": {
+              "long": "Match Finished",
+              "short": "FT",
+              "elapsed": 90
+            }
+          },
+          "league": {
+            "id": 667,
+            "name": "Friendlies Clubs",
+            "country": "World",
+            "logo": "https://media.api-sports.io/football/leagues/667.png",
+            "flag": null,
+            "season": 2021,
+            "round": "Club Friendlies 3"
+          },
+          "teams": {
+            "home": {
+              "id": 55,
+              "name": "Brentford",
+              "logo": "https://media.api-sports.io/football/teams/55.png",
+              "winner": false
+            },
+            "away": {
+              "id": 48,
+              "name": "West Ham",
+              "logo": "https://media.api-sports.io/football/teams/48.png",
+              "winner": true
+            }
+          },
+          "goals": {
+            "home": 0,
+            "away": 1
+          },
+          "score": {
+            "halftime": {
+              "home": null,
+              "away": null
+            },
+            "fulltime": {
+              "home": 0,
+              "away": 1
+            },
+            "extratime": {
+              "home": null,
+              "away": null
+            },
+            "penalty": {
+              "home": null,
+              "away": null
+            }
+          }
+        },
+        {
+          "fixture": {
+            "id": 604213,
+            "referee": null,
+            "timezone": "UTC",
+            "date": "2020-08-29T13:00:00+00:00",
+            "timestamp": 1598706000,
+            "periods": {
+              "first": 1598706000,
+              "second": 1598709600
+            },
+            "venue": {
+              "id": 598,
+              "name": "London Stadium",
+              "city": "London"
+            },
+            "status": {
+              "long": "Match Finished",
+              "short": "FT",
+              "elapsed": 90
+            }
+          },
+          "league": {
+            "id": 667,
+            "name": "Friendlies Clubs",
+            "country": "World",
+            "logo": "https://media.api-sports.io/football/leagues/667.png",
+            "flag": null,
+            "season": 2020,
+            "round": "Club Friendlies 3"
+          },
+          "teams": {
+            "home": {
+              "id": 48,
+              "name": "West Ham",
+              "logo": "https://media.api-sports.io/football/teams/48.png",
+              "winner": true
+            },
+            "away": {
+              "id": 55,
+              "name": "Brentford",
+              "logo": "https://media.api-sports.io/football/teams/55.png",
+              "winner": false
+            }
+          },
+          "goals": {
+            "home": 2,
+            "away": 1
+          },
+          "score": {
+            "halftime": {
+              "home": 1,
+              "away": 1
+            },
+            "fulltime": {
+              "home": 2,
+              "away": 1
+            },
+            "extratime": {
+              "home": null,
+              "away": null
+            },
+            "penalty": {
+              "home": null,
+              "away": null
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

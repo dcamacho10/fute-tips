@@ -16,17 +16,36 @@ export class Report {
     const worksheet = this.workbook.addWorksheet('rodada-atual');
     //Header: TODO estudar como fazer um Header no excel pela lib
     worksheet.addRow(["Date", "Home", "Away", "Referee", "Venue", "Status"]);
-    console.log(fixturesData)
-
     const fixtures = fixturesData.response
     fixtures.forEach(item => {
       worksheet.addRow([item.fixture.date, item.teams.home.name, item.teams.away.name, item.fixture.referee, item.fixture.venue.name, item.fixture.status.long]);
     });
   }
 
+  addFixturePrediction(predictionData) {
+    const { predictions, teams } = predictionData.response[0]
+    const { winner, advice, goals, percent } = predictions
+    const { home, away } = teams
+    const worksheet = this.workbook.addWorksheet(`${home.name} x ${away.name}`);
+    worksheet.addRow(["Predictions"])
+    worksheet.addRow([])
+    worksheet.addRow(["Winner", "Advice", "Home goals", "Away goals"])
+    worksheet.addRow([winner.name, advice, goals.home, goals.away])
+    worksheet.addRow([])
+    worksheet.addRow(["Result prediction in percent"])
+    worksheet.addRow(["Home", "Draw", "Away"])
+    worksheet.addRow([percent.home, percent.draw, percent.away])
+    worksheet.addRow([])
+    worksheet.addRow(["Teams recent form - last 5 games"])
+    worksheet.addRow(["Team", "Form", "Attack form", "Defense form", "Total Goals for", "Average Goals for", "Total Goals Against", "Average Goals Against"])
+    worksheet.addRow([home.name, home.last_5.form, home.last_5.att, home.last_5.def, home.last_5.goals.for.total, home.last_5.goals.for.average, home.last_5.goals.against.total, home.last_5.goals.against.average])
+    worksheet.addRow([away.name, away.last_5.form, away.last_5.att, away.last_5.def, away.last_5.goals.for.total, away.last_5.goals.for.average, away.last_5.goals.against.total, away.last_5.goals.against.average])
+  }
+
   saveWorkbook() {
     const date = new Date();
     const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+    console.log(formattedDate)
     const fileName = `fixtures-${formattedDate}.xlsx`;
 
     this.workbook.xlsx.writeFile(fileName)
