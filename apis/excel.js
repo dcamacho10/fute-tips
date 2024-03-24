@@ -42,6 +42,31 @@ export class Report {
     worksheet.addRow([away.name, away.last_5.form, away.last_5.att, away.last_5.def, away.last_5.goals.for.total, away.last_5.goals.for.average, away.last_5.goals.against.total, away.last_5.goals.against.average])
   }
 
+  addFixtureTeamsStatistics(home, away) {
+    console.log(home, away)
+    const { homeTeam, homeStatistics } = home
+    const { awayTeam, awayStatistics } = away
+    let worksheet = this.workbook.getWorksheet(`${homeTeam.name} x ${awayTeam.name}`);
+    if (worksheet === undefined) {
+      worksheet = this.workbook.addWorksheet(`${homeTeam.name} x ${awayTeam.name}`)
+    }
+    worksheet.addRow(["Teams statistics"])
+    worksheet.addRow([])
+    worksheet.addRow(["Somente jogos em casa"])
+    worksheet.addRow([`Home team: ${homeTeam.name}`, "gols marcados", "gols concedidos"])
+    const fixturesAtHome = homeStatistics.filter(item => item.teams.home.id === homeTeam.id)
+    fixturesAtHome.forEach(item => {
+      worksheet.addRow([`VS ${item.teams.away.name}`, item.goals.home, item.goals.away])
+    });
+    worksheet.addRow([])
+    worksheet.addRow(["Somente jogos fora"])
+    worksheet.addRow([`Away team: ${awayTeam.name}`, "gols marcados", "gols concedidos"])
+    const fixturesAtAway = awayStatistics.filter(item => item.teams.away.id === awayTeam.id)
+    fixturesAtAway.forEach(item => {
+      worksheet.addRow([`VS ${item.teams.home.name}`, item.goals.away, item.goals.home])
+    });
+  }
+
   saveWorkbook() {
     const date = new Date();
     const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
