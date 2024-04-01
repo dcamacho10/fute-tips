@@ -3,13 +3,15 @@ import { getAllFixturesFromCurrentSeason, getCurrentFixtures, matchesAnalysis } 
 
 async function main() {
   console.log('comecou')
+  //await testApi()
   const report = new Report()
+  const fixtureHistory = await getAllFixturesFromCurrentSeason()
   const { response: currentFixtures } = await getCurrentFixtures(report);
-  //const predictionPromises = currentFixtures.map(item => getPrediction(item.fixture.id, report));
-  //await Promise.all(predictionPromises);
+  // const predictionPromises = currentFixtures.map(item => getPrediction(item.fixture.id, report));
+  // await Promise.all(predictionPromises);
   //getPrediction('dummieid', report)
   //fixturesTeamsStatistics(currentFixtures)
-  const fixtureHistory = await getAllFixturesFromCurrentSeason()
+
   await matchesAnalysis(currentFixtures, fixtureHistory, report)
 
   report.saveWorkbook()

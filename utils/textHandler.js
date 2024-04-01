@@ -9,3 +9,21 @@ export function extractNumberFromPhrase(phrase) {
     console.log('No number found in the phrase.');
   }
 }
+
+
+
+export function abbreviateName(fullName) {
+  if (!fullName) {
+    return ' '
+  }
+  const nameWithoutCountry = fullName.split(',')
+  const parts = nameWithoutCountry[0].split(' ');
+  if (parts.length === 1) {
+    return fullName; // Return full name if it's just one word
+  } else {
+    const firstName = parts[0];
+    const lastName = parts[parts.length - 1];
+    const abbreviatedFirstName = firstName.charAt(0) + '.';
+    return abbreviatedFirstName + ' ' + lastName;
+  }
+}
