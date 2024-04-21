@@ -1,5 +1,5 @@
 import ExcelJS from 'exceljs';
-import { findObjectByAttribute, findValueByType } from '../utils/objectHandler.js';
+import { findObjectByAttribute, findValueByType, removeDuplicateObjects } from '../utils/objectHandler.js';
 import { abbreviateName } from '../utils/textHandler.js';
 
 export class Report {
@@ -51,6 +51,8 @@ export class Report {
   addFixtureTeamsStatistics(home, away) {
     const { homeTeam, homeStatistics } = home
     const { awayTeam, awayStatistics } = away
+    const homePlayers = []
+    const awayPlayers = []
     // let sheetName = `${home.name} x ${away.name}`
     // if (sheetName.length > 31) {
     //   sheetName = sheetName.substring(0, 31); // Keep only the first 31 characters
@@ -68,6 +70,10 @@ export class Report {
     fixturesAtHome.forEach(item => {
       const homeFixtureStatistics = item.statistics[0].statistics
       const awayFixtureStatistics = item.statistics[1].statistics
+      const homeFixturePlayersStatistics = item.players[0]?.players
+      homeFixturePlayersStatistics && homeFixturePlayersStatistics.forEach((item) => {
+        homePlayers.push({ id: item.player.id, name: item.player.name })
+      })
       worksheet.addRow([`VS ${item.teams.away.name}`, item.goals.home, item.goals.away, item.goals.home + item.goals.away, findValueByType(homeFixtureStatistics, "Shots on Goal"), findValueByType(homeFixtureStatistics, "Total Shots"), findValueByType(awayFixtureStatistics, "Shots on Goal"), findValueByType(awayFixtureStatistics, "Total Shots"), findValueByType(homeFixtureStatistics, "Fouls"), findValueByType(awayFixtureStatistics, "Fouls"), findValueByType(homeFixtureStatistics, "Fouls") + findValueByType(awayFixtureStatistics, "Fouls"), findValueByType(homeFixtureStatistics, "Corner Kicks"), findValueByType(awayFixtureStatistics, "Corner Kicks"), findValueByType(homeFixtureStatistics, "Corner Kicks") + findValueByType(awayFixtureStatistics, "Corner Kicks"), findValueByType(homeFixtureStatistics, "Yellow Cards"), findValueByType(awayFixtureStatistics, "Yellow Cards"), findValueByType(homeFixtureStatistics, "Yellow Cards") + findValueByType(awayFixtureStatistics, "Yellow Cards"), findValueByType(homeFixtureStatistics, "Goalkeeper Saves")])
     });
     worksheet.addRow([])
@@ -77,10 +83,78 @@ export class Report {
     fixturesAtAway.forEach(item => {
       const homeFixtureStatistics = item.statistics[0].statistics
       const awayFixtureStatistics = item.statistics[1].statistics
+      const awayFixturePlayersStatistics = item.players[1]?.players
+      awayFixturePlayersStatistics && awayFixturePlayersStatistics.forEach((item) => {
+        awayPlayers.push({ id: item.player.id, name: item.player.name })
+      })
       worksheet.addRow([`VS ${item.teams.home.name}`, item.goals.away, item.goals.home, item.goals.away + item.goals.home, findValueByType(awayFixtureStatistics, "Shots on Goal"), findValueByType(awayFixtureStatistics, "Total Shots"), findValueByType(homeFixtureStatistics, "Shots on Goal"), findValueByType(homeFixtureStatistics, "Total Shots"), findValueByType(awayFixtureStatistics, "Fouls"), findValueByType(homeFixtureStatistics, "Fouls"), findValueByType(awayFixtureStatistics, "Fouls") + findValueByType(homeFixtureStatistics, "Fouls"), findValueByType(awayFixtureStatistics, "Corner Kicks"), findValueByType(homeFixtureStatistics, "Corner Kicks"), findValueByType(awayFixtureStatistics, "Corner Kicks") + findValueByType(homeFixtureStatistics, "Corner Kicks"), findValueByType(awayFixtureStatistics, "Yellow Cards"), findValueByType(homeFixtureStatistics, "Yellow Cards"), findValueByType(awayFixtureStatistics, "Yellow Cards") + findValueByType(homeFixtureStatistics, "Yellow Cards"), findValueByType(awayFixtureStatistics, "Goalkeeper Saves")])
     });
 
+    worksheet.addRow([])
+    const row = worksheet.addRow(["Estatísticas dos jogadores"])
+    this.fillCellsWithColor(row, 'FF808080')
+    const row2 = worksheet.addRow(["Time da casa - Para jogos em casa"])
+    this.fillCellsWithColor(row2, '800080')
+    const homePlayersWithoutDup = removeDuplicateObjects(homePlayers)
+    homePlayersWithoutDup.forEach((player) => {
+      worksheet.addRow([])
+      const row = worksheet.addRow([player.name, "Minutos jogados", "Nota", "Chutes no alvo", "Chutes totais", "Gols", "Assistência", "Gols cedidos (Goleiro)", "Desarmes", "Faltas cometidas", "Faltas recebidas", "Cartão amarelo", "Cartão vermelho"])
+      this.fillCellsWithColor(row, 'FFC0C0C0')
+      fixturesAtHome.forEach((item) => {
+        let homeFixturePlayerStatistics
+        item.players[0]?.players ?
+          homeFixturePlayerStatistics = this.getPlayerById(item.players[0].players, player.id) : null
+        if (homeFixturePlayerStatistics && Object.keys(homeFixturePlayerStatistics).length > 0) {
+          worksheet.addRow([`VS ${item.teams.away.name}`, homeFixturePlayerStatistics.games.minutes, homeFixturePlayerStatistics.games.rating, homeFixturePlayerStatistics.shots.on, homeFixturePlayerStatistics.shots.total, homeFixturePlayerStatistics.goals.total, homeFixturePlayerStatistics.goals.assists, homeFixturePlayerStatistics.goals.conceded, homeFixturePlayerStatistics.tackles.total, homeFixturePlayerStatistics.fouls.committed, homeFixturePlayerStatistics.fouls.drawn, homeFixturePlayerStatistics.cards.yellow, homeFixturePlayerStatistics.cards.red])
+
+        }
+      })
+    })
+
+    worksheet.addRow([])
+    worksheet.addRow([])
+    worksheet.addRow([])
+    const row3 = worksheet.addRow(["Time visitante - Para jogos fora"])
+    this.fillCellsWithColor(row3, 'FFFF00')
+    const awayPlayersWithoutDup = removeDuplicateObjects(awayPlayers)
+    awayPlayersWithoutDup.forEach((player) => {
+      worksheet.addRow([])
+      const row = worksheet.addRow([player.name, "Minutos jogados", "Nota", "Chutes no alvo", "Chutes totais", "Gols", "Assistência", "Gols cedidos (Goleiro)", "Desarmes", "Faltas cometidas", "Faltas recebidas", "Cartão amarelo", "Cartão vermelho"])
+      this.fillCellsWithColor(row, 'FFC0C0C0')
+      fixturesAtAway.forEach((item) => {
+        let awayFixturePlayerStatistics
+        item.players[1]?.players ?
+          awayFixturePlayerStatistics = this.getPlayerById(item.players[1].players, player.id) : null
+        if (awayFixturePlayerStatistics && Object.keys(awayFixturePlayerStatistics).length > 0) {
+          worksheet.addRow([`VS ${item.teams.home.name}`, awayFixturePlayerStatistics.games.minutes, awayFixturePlayerStatistics.games.rating, awayFixturePlayerStatistics.shots.on, awayFixturePlayerStatistics.shots.total, awayFixturePlayerStatistics.goals.total, awayFixturePlayerStatistics.goals.assists, awayFixturePlayerStatistics.goals.conceded, awayFixturePlayerStatistics.tackles.total, awayFixturePlayerStatistics.fouls.committed, awayFixturePlayerStatistics.fouls.drawn, awayFixturePlayerStatistics.cards.yellow, awayFixturePlayerStatistics.cards.red])
+
+        }
+      })
+    })
+
+
     this.improveSheetVisualization(worksheet)
+  }
+
+  fillCellsWithColor(row, rgbColor) {
+    row.eachCell((cell) => {
+      cell.fill = {
+        type: 'pattern',
+        pattern: 'solid',
+        fgColor: { argb: rgbColor } // Gray color
+      };
+    });
+  }
+
+  getPlayerById(playersArray, id) {
+    for (let playerData of playersArray) {
+      if (playerData.player.id === id) {
+        if (playerData.statistics[0].games.minutes > 0)
+          return playerData.statistics[0];
+      }
+    }
+    // If player with the given ID is not found
+    return null;
   }
 
   addRefereesStats(allRefereeStats) {

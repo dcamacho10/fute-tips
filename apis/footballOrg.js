@@ -64,10 +64,10 @@ export async function getCurrentFixtures(report) {
     // const jsonData = JSON.stringify(response.data);
     // saveJson('Fixtures_Current', jsonData)
 
-    //const data = JSON.parse(fs.readFileSync('C:\\Users\\diogo\\fute-tips\\mocks\\Fixtures_Current.json'));
+    // const data = JSON.parse(fs.readFileSync('C:\\Users\\diogo\\fute-tips\\mocks\\Fixtures_Current.json'));
     // console.log(JSON.stringify(data.response, null, 2)); // Display response data
-    //report.addCurrentFixture(data)
-    //return data;
+    // report.addCurrentFixture(data)
+    // return data;
 
   } catch (error) {
     console.error(error);
