@@ -1,5 +1,7 @@
 import { Report } from './apis/excel.js';
-import { getAllFixturesFromCurrentSeason, getCurrentFixtures, matchesAnalysis } from './apis/footballOrg.js';
+import { getAllFixturesFromCurrentSeason, getCurrentFixtures, getPrediction, matchesAnalysis } from './apis/footballOrg.js';
+// import { waitForTwoMinutes } from './utils/date.js';
+// import { sendMail } from "./apis/email.js";
 
 async function main() {
   console.log('comecou')
@@ -7,14 +9,15 @@ async function main() {
   const report = new Report()
   const fixtureHistory = await getAllFixturesFromCurrentSeason()
   const { response: currentFixtures } = await getCurrentFixtures(report);
-  // const predictionPromises = currentFixtures.map(item => getPrediction(item.fixture.id, report));
-  // await Promise.all(predictionPromises);
-  // getPrediction('dummieid', report)
-  // fixturesTeamsStatistics(currentFixtures)
-
+  const predictionPromises = currentFixtures.map(item => getPrediction(item, report));
+  await Promise.all(predictionPromises);
+  // pausa para esperar o limite de requisições por min da conta freemium
+  // await waitForTwoMinutes()
   await matchesAnalysis(currentFixtures, fixtureHistory, report)
 
-  report.saveWorkbook()
+  // await sendMail(currentFixtures[0].league.name)
+
+  report.saveWorkbook(currentFixtures[0].league)
 
 
 }

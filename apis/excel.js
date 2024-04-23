@@ -1,4 +1,5 @@
 import ExcelJS from 'exceljs';
+import { formattedDate } from '../utils/date.js';
 import { findObjectByAttribute, findValueByType, removeDuplicateObjects } from '../utils/objectHandler.js';
 import { abbreviateName } from '../utils/textHandler.js';
 
@@ -28,24 +29,27 @@ export class Report {
     const { predictions, teams } = predictionData.response[0]
     const { winner, advice, goals, percent } = predictions
     const { home, away } = teams
-    let sheetName = `${home.name} x ${away.name}`
-    if (sheetName.length > 31) {
-      sheetName = sheetName.substring(0, 31); // Keep only the first 31 characters
-    }
-    const worksheet = this.workbook.addWorksheet(sheetName);
-    worksheet.addRow(["Predictions"])
-    worksheet.addRow([])
-    worksheet.addRow(["Winner", "Advice", "Home goals", "Away goals"])
+    const worksheet = this.createOrUpdateWorksheet(home, away)
+    const rowPrediction = worksheet.addRow(["Predictions"])
+    this.fillCellsWithColor(rowPrediction, '8cad93')
+    const rowPredictionHeader = worksheet.addRow(["Winner", "Advice", "Home goals", "Away goals"])
+    this.fillCellsWithColor(rowPredictionHeader, 'FFC0C0C0')
     worksheet.addRow([winner.name, advice, goals.home, goals.away])
     worksheet.addRow([])
-    worksheet.addRow(["Result prediction in percent"])
-    worksheet.addRow(["Home", "Draw", "Away"])
+    const rowResultPrediction = worksheet.addRow(["Result prediction in percent"])
+    this.fillCellsWithColor(rowResultPrediction, '8cad93')
+    const rowResultPredictionHeader = worksheet.addRow(["Home", "Draw", "Away"])
+    this.fillCellsWithColor(rowResultPredictionHeader, 'FFC0C0C0')
     worksheet.addRow([percent.home, percent.draw, percent.away])
     worksheet.addRow([])
-    worksheet.addRow(["Teams recent form - last 5 games"])
-    worksheet.addRow(["Team", "Form", "Attack form", "Defense form", "Total Goals for", "Average Goals for", "Total Goals Against", "Average Goals Against"])
+    const rowLastFiveGames = worksheet.addRow(["Teams recent form - last 5 games"])
+    this.fillCellsWithColor(rowLastFiveGames, '8cad93')
+    const rowLastFiveGamesHeader = worksheet.addRow(["Team", "Form", "Attack form", "Defense form", "Total Goals for", "Average Goals for", "Total Goals Against", "Average Goals Against"])
+    this.fillCellsWithColor(rowLastFiveGamesHeader, 'FFC0C0C0')
     worksheet.addRow([home.name, home.last_5.form, home.last_5.att, home.last_5.def, home.last_5.goals.for.total, home.last_5.goals.for.average, home.last_5.goals.against.total, home.last_5.goals.against.average])
     worksheet.addRow([away.name, away.last_5.form, away.last_5.att, away.last_5.def, away.last_5.goals.for.total, away.last_5.goals.for.average, away.last_5.goals.against.total, away.last_5.goals.against.average])
+    worksheet.addRow([])
+    worksheet.addRow([])
   }
 
   addFixtureTeamsStatistics(home, away) {
@@ -53,19 +57,15 @@ export class Report {
     const { awayTeam, awayStatistics } = away
     const homePlayers = []
     const awayPlayers = []
-    // let sheetName = `${home.name} x ${away.name}`
-    // if (sheetName.length > 31) {
-    //   sheetName = sheetName.substring(0, 31); // Keep only the first 31 characters
-    // }
-    let worksheet = this.workbook.getWorksheet(`${homeTeam.name} x ${awayTeam.name}`);
-    if (worksheet === undefined) {
-      worksheet = this.workbook.addWorksheet(`${homeTeam.name} x ${awayTeam.name}`)
-    }
-    worksheet.addRow(["Teams statistics"])
+    const worksheet = this.createOrUpdateWorksheet(homeTeam, awayTeam)
+    const rowTeamStats = worksheet.addRow(["Teams statistics"])
+    this.fillCellsWithColor(rowTeamStats, '3492eb')
     worksheet.addRow([])
-    worksheet.addRow(["Somente jogos em casa"])
-    worksheet.addRow([`Home team: ${homeTeam.name}`, "gols marcados", "gols concedidos", "soma dos gols", "chutes no alvo", "total de chutes", "chutes no alvo sofridos", "total de chute sofridos", "faltas cometidas", "faltas sofridas", "total de faltas", "escanteios ganhos", "escanteios cedidos", "total de escanteios", "cartões amarelos tomados", "cartões amarelos do adversário", "totais de cartões amarelos", "defesas do goleiro"
+    const rowHomeTeam = worksheet.addRow(["Somente jogos em casa"])
+    this.fillCellsWithColor(rowHomeTeam, '85f28d')
+    const rowHomeTeamHeader = worksheet.addRow([`Home team: ${homeTeam.name}`, "gols marcados", "gols concedidos", "soma dos gols", "chutes no alvo", "total de chutes", "chutes no alvo sofridos", "total de chute sofridos", "faltas cometidas", "faltas sofridas", "total de faltas", "escanteios ganhos", "escanteios cedidos", "total de escanteios", "cartões amarelos tomados", "cartões amarelos do adversário", "totais de cartões amarelos", "defesas do goleiro"
     ])
+    this.fillCellsWithColor(rowHomeTeamHeader, 'FFC0C0C0')
     const fixturesAtHome = homeStatistics.filter(item => item.teams.home.id === homeTeam.id)
     fixturesAtHome.forEach(item => {
       const homeFixtureStatistics = item.statistics[0].statistics
@@ -77,8 +77,10 @@ export class Report {
       worksheet.addRow([`VS ${item.teams.away.name}`, item.goals.home, item.goals.away, item.goals.home + item.goals.away, findValueByType(homeFixtureStatistics, "Shots on Goal"), findValueByType(homeFixtureStatistics, "Total Shots"), findValueByType(awayFixtureStatistics, "Shots on Goal"), findValueByType(awayFixtureStatistics, "Total Shots"), findValueByType(homeFixtureStatistics, "Fouls"), findValueByType(awayFixtureStatistics, "Fouls"), findValueByType(homeFixtureStatistics, "Fouls") + findValueByType(awayFixtureStatistics, "Fouls"), findValueByType(homeFixtureStatistics, "Corner Kicks"), findValueByType(awayFixtureStatistics, "Corner Kicks"), findValueByType(homeFixtureStatistics, "Corner Kicks") + findValueByType(awayFixtureStatistics, "Corner Kicks"), findValueByType(homeFixtureStatistics, "Yellow Cards"), findValueByType(awayFixtureStatistics, "Yellow Cards"), findValueByType(homeFixtureStatistics, "Yellow Cards") + findValueByType(awayFixtureStatistics, "Yellow Cards"), findValueByType(homeFixtureStatistics, "Goalkeeper Saves")])
     });
     worksheet.addRow([])
-    worksheet.addRow(["Somente jogos fora"])
-    worksheet.addRow([`Away team: ${awayTeam.name}`, "gols marcados", "gols concedidos", "soma dos gols", "chutes no alvo", "total de chutes", "chutes no alvo sofridos", "total de chute sofridos", "faltas cometidas", "faltas sofridas", "total de faltas", "escanteios ganhos", "escanteios cedidos", "total de escanteios", "cartões amarelos tomados", "cartões amarelos do adversário", "totais de cartões amarelos", "defesas do goleiro"])
+    const rowAwayTeam = worksheet.addRow(["Somente jogos fora"])
+    this.fillCellsWithColor(rowAwayTeam, 'f7a13e')
+    const rowAwayTeamHeader = worksheet.addRow([`Away team: ${awayTeam.name}`, "gols marcados", "gols concedidos", "soma dos gols", "chutes no alvo", "total de chutes", "chutes no alvo sofridos", "total de chute sofridos", "faltas cometidas", "faltas sofridas", "total de faltas", "escanteios ganhos", "escanteios cedidos", "total de escanteios", "cartões amarelos tomados", "cartões amarelos do adversário", "totais de cartões amarelos", "defesas do goleiro"])
+    this.fillCellsWithColor(rowAwayTeamHeader, 'FFC0C0C0')
     const fixturesAtAway = awayStatistics.filter(item => item.teams.away.id === awayTeam.id)
     fixturesAtAway.forEach(item => {
       const homeFixtureStatistics = item.statistics[0].statistics
@@ -93,11 +95,11 @@ export class Report {
     worksheet.addRow([])
     const row = worksheet.addRow(["Estatísticas dos jogadores"])
     this.fillCellsWithColor(row, 'FF808080')
+    worksheet.addRow([])
     const row2 = worksheet.addRow(["Time da casa - Para jogos em casa"])
-    this.fillCellsWithColor(row2, '800080')
+    this.fillCellsWithColor(row2, '85f28d')
     const homePlayersWithoutDup = removeDuplicateObjects(homePlayers)
     homePlayersWithoutDup.forEach((player) => {
-      worksheet.addRow([])
       const row = worksheet.addRow([player.name, "Minutos jogados", "Nota", "Chutes no alvo", "Chutes totais", "Gols", "Assistência", "Gols cedidos (Goleiro)", "Desarmes", "Faltas cometidas", "Faltas recebidas", "Cartão amarelo", "Cartão vermelho"])
       this.fillCellsWithColor(row, 'FFC0C0C0')
       fixturesAtHome.forEach((item) => {
@@ -109,16 +111,16 @@ export class Report {
 
         }
       })
+      worksheet.addRow([])
     })
 
     worksheet.addRow([])
     worksheet.addRow([])
     worksheet.addRow([])
     const row3 = worksheet.addRow(["Time visitante - Para jogos fora"])
-    this.fillCellsWithColor(row3, 'FFFF00')
+    this.fillCellsWithColor(row3, 'f7a13e')
     const awayPlayersWithoutDup = removeDuplicateObjects(awayPlayers)
     awayPlayersWithoutDup.forEach((player) => {
-      worksheet.addRow([])
       const row = worksheet.addRow([player.name, "Minutos jogados", "Nota", "Chutes no alvo", "Chutes totais", "Gols", "Assistência", "Gols cedidos (Goleiro)", "Desarmes", "Faltas cometidas", "Faltas recebidas", "Cartão amarelo", "Cartão vermelho"])
       this.fillCellsWithColor(row, 'FFC0C0C0')
       fixturesAtAway.forEach((item) => {
@@ -130,6 +132,7 @@ export class Report {
 
         }
       })
+      worksheet.addRow([])
     })
 
 
@@ -175,6 +178,18 @@ export class Report {
 
   }
 
+  createOrUpdateWorksheet(home, away) {
+    let sheetName = `${home.name} x ${away.name}`;
+    if (sheetName.length > 31) {
+      sheetName = sheetName.substring(0, 31); // Keep only the first 31 characters
+    }
+    let worksheet = this.workbook.getWorksheet(sheetName);
+    if (worksheet === undefined) {
+      worksheet = this.workbook.addWorksheet(sheetName);
+    }
+    return worksheet;
+  }
+
   improveSheetVisualization(worksheet) {
     // Auto-fit column width based on content
     worksheet.columns.forEach(column => {
@@ -199,11 +214,10 @@ export class Report {
 
 
 
-  saveWorkbook() {
-    const date = new Date();
-    const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+  saveWorkbook(league) {
+
     console.log(formattedDate)
-    const fileName = `fixtures-${formattedDate}.xlsx`;
+    const fileName = `${league.name}-${league.country}-${formattedDate()}.xlsx`;
 
     this.workbook.xlsx.writeFile(fileName)
       .then(() => {

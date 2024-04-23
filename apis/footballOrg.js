@@ -1,26 +1,12 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
 import fs from 'fs';
+import { formattedDate } from '../utils/date.js';
 import { findValueByType } from '../utils/objectHandler.js';
 import { saveJson } from '../utils/saveFile.js';
 import { abbreviateName } from '../utils/textHandler.js';
 dotenv.config()
 
-// Counter variable to store the count of requests
-let requestCount = 0;
-
-// Axios interceptor to intercept requests
-axios.interceptors.request.use(function (config) {
-  // Increment the request count
-  requestCount++;
-  if (requestCount >= 29) {
-    setTimeout(() => { console.log('30 request achieved, waiting 2 min') }, 2000)
-    requestCount = 0
-  }
-  return config;
-}, function (error) {
-  return Promise.reject(error);
-});
 
 const options = (method, url, params) => {
   return {
@@ -41,7 +27,7 @@ async function getCurrentRound() {
       season: process.env.SEASON,
       current: 'true'
     }));
-    //Usando a função para salvar os dados para criação do mock, retirar quando o MVP estiver pronto
+    // Usando a função para salvar os dados para criação do mock, retirar quando o MVP estiver pronto
     // const jsonData = JSON.stringify(response.data);
     // saveJson('Fixture_Current_Round', jsonData)
     return response.data.response[0]
@@ -52,22 +38,23 @@ async function getCurrentRound() {
 
 export async function getCurrentFixtures(report) {
   try {
-    const currentRound = await getCurrentRound()
-    const response = await axios.request(options('GET', 'https://api-football-v1.p.rapidapi.com/v3/fixtures', {
-      league: process.env.LEAGUE,
-      season: process.env.SEASON,
-      round: currentRound
-    }));
-    report.addCurrentFixture(response.data)
-    return response.data;
-    //Usando a função para salvar os dados para criação do mock, retirar quando o MVP estiver pronto
+    // const currentRound = await getCurrentRound()
+    // const response = await axios.request(options('GET', 'https://api-football-v1.p.rapidapi.com/v3/fixtures', {
+    //   league: process.env.LEAGUE,
+    //   season: process.env.SEASON,
+    //   round: currentRound
+    // }));
+    // report.addCurrentFixture(response.data)
     // const jsonData = JSON.stringify(response.data);
     // saveJson('Fixtures_Current', jsonData)
+    // return response.data;
+    //Usando a função para salvar os dados para criação do mock, retirar quando o MVP estiver pronto
 
-    // const data = JSON.parse(fs.readFileSync('C:\\Users\\diogo\\fute-tips\\mocks\\Fixtures_Current.json'));
+
+    const data = JSON.parse(fs.readFileSync('C:\\Users\\diogo\\fute-tips\\mocks\\Fixtures_Current.json'));
     // console.log(JSON.stringify(data.response, null, 2)); // Display response data
-    // report.addCurrentFixture(data)
-    // return data;
+    report.addCurrentFixture(data)
+    return data;
 
   } catch (error) {
     console.error(error);
@@ -78,18 +65,18 @@ export async function getCurrentFixtures(report) {
 export async function getAllFixturesFromCurrentSeason() {
 
   try {
-    const response = await axios.request(options('GET', 'https://api-football-v1.p.rapidapi.com/v3/fixtures', {
-      league: process.env.LEAGUE,
-      season: process.env.SEASON,
-    }
-    ));
+    // const response = await axios.request(options('GET', 'https://api-football-v1.p.rapidapi.com/v3/fixtures', {
+    //   league: process.env.LEAGUE,
+    //   season: process.env.SEASON,
+    // }
+    // ));
 
-    return response.data.response
-    // const data = JSON.parse(fs.readFileSync(`C:\\Users\\diogo\\fute-tips\\mocks\\All_Fixtures.json`));
+    // const jsonData = JSON.stringify(response.data);
+    // saveJson(`All_Fixtures`, jsonData)
 
-    // return data.response
-
-
+    // return response.data.response
+    const data = JSON.parse(fs.readFileSync(`C:\\Users\\diogo\\fute-tips\\mocks\\All_Fixtures.json`));
+    return data.response
 
   } catch (error) {
     console.error(error);
@@ -100,12 +87,15 @@ export async function getAllFixturesFromCurrentSeason() {
 export async function getAllStatisticByFixtureId(team, teamAllFixtureIds) {
   try {
 
-    const response = await axios.request(options('GET', 'https://api-football-v1.p.rapidapi.com/v3/fixtures', {
-      ids: teamAllFixtureIds
-    }));
-    return response.data.response
-    // const data = JSON.parse(fs.readFileSync(`C:\\Users\\diogo\\fute-tips\\mocks\\${team.name}.json`));
-    // return data.response
+    // const response = await axios.request(options('GET', 'https://api-football-v1.p.rapidapi.com/v3/fixtures', {
+    //   ids: teamAllFixtureIds
+    // }));
+    // const jsonData = JSON.stringify(response.data);
+    // saveJson(`${team.name}`, jsonData)
+    // return response.data.response
+
+    const data = JSON.parse(fs.readFileSync(`C:\\Users\\diogo\\fute-tips\\mocks\\${team.name}.json`));
+    return data.response
   } catch (error) {
     console.error(error);
   }
@@ -187,7 +177,7 @@ export async function testApi() {
 
 
 // export async function fixturesTeamsStatistics(currentFixtures, report) {
-//   //  console.log(currentFixtures)
+//  console.log(currentFixtures)
 //   currentFixtures.forEach((fixture) => {
 //     const homeTeam = getTeamStatistics({
 //       league: { id: fixture.league.id }, id: fixture.teams.home.id
@@ -201,15 +191,15 @@ export async function testApi() {
 
 // async function getTeamStatistics(teamData) {
 //   try {
-//     // const response = await axios.request(options('GET', 'https://api-football-v1.p.rapidapi.com/v3/teams/statistics', {
-//     //   league: teamData.league.id,
-//     //   season: currentPremierLeagueSeason(),
-//     //   team: teamData.id
-//     // }));
-//     // Usando a função para salvar os dados para criação do mock, retirar quando o MVP estiver pronto
-//     // const jsonData = JSON.stringify(response.data);
-//     // saveJson(`Team_Statistics_${teamData.id}`, jsonData)
-//     // return response.data
+// const response = await axios.request(options('GET', 'https://api-football-v1.p.rapidapi.com/v3/teams/statistics', {
+//   league: teamData.league.id,
+//   season: currentPremierLeagueSeason(),
+//   team: teamData.id
+// }));
+// Usando a função para salvar os dados para criação do mock, retirar quando o MVP estiver pronto
+// const jsonData = JSON.stringify(response.data);
+// saveJson(`Team_Statistics_${teamData.id}`, jsonData)
+// return response.data
 //     const response = JSON.parse(fs.readFileSync(`C:\\Users\\diogo\\fute-tips\\mocks\\Team_Statistics_${teamData.id}.json`));
 //     return response
 //   } catch (error) {
@@ -218,13 +208,16 @@ export async function testApi() {
 // }
 
 
-export async function getPrediction(fixtureId, report) {
+export async function getPrediction(item, report) {
   // const response = await axios.request(options('GET', 'https://api-football-v1.p.rapidapi.com/v3/predictions', {
-  //   fixture: fixtureId
+  //   fixture: item.fixture.id
   // }));
-  //Usando a função para salvar os dados para criação do mock, retirar quando o MVP estiver pronto
+  // Usando a função para salvar os dados para criação do mock, retirar quando o MVP estiver pronto
+  const title = `${String(item.teams.home.name).substring(0, 3)} x ${String(item.teams.away.name).substring(0, 3)}-predictions`
   // const jsonData = JSON.stringify(response.data);
-  // saveJson('Fixture_prediction', jsonData)
-  const response = JSON.parse(fs.readFileSync('C:\\Users\\diogo\\fute-tips\\mocks\\Fixture_Prediction.json'));
-  report.addFixturePrediction(response.data)
+  // saveJson(`${title}-${formattedDate()}`, jsonData)
+  // report.addFixturePrediction(response.data)
+  const prediction = JSON.parse(fs.readFileSync(`C:\\Users\\diogo\\fute-tips\\mocks\\${title}-${formattedDate()}.json`));
+  report.addFixturePrediction(prediction)
+
 }
